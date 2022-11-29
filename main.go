@@ -12,9 +12,9 @@ func main() {
 	// ミドルウェア
 	engine.Use(middleware.RecordUaAndTime)
 	// CRUD 書籍
-	bookEngine := engine.Group("book/")
+	bookEngine := engine.Group("/book")
 	{
-		v1 := bookEngine.Group("v1")
+		v1 := bookEngine.Group("/v1")
 		{
 			v1.POST("/add", controller.BookAdd)
 			v1.GET("/list", controller.BookList)

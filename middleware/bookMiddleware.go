@@ -9,7 +9,7 @@ import (
 
 // リクエストのログを記録
 func RecordUaAndTime(c *gin.Context){
-	logger,err := zap.NewProduction()
+	logger, err := zap.NewProduction()
 	if err != nil {
 		log.Fatal(err.Error())
 	}

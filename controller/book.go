@@ -47,6 +47,7 @@ func BookUpdate(c *gin.Context) {
 	err =bookService.UpdateBook(&book)
 	if err != nil{
 		c.String(http.StatusInternalServerError, "Server Error")
+		return
 	}
 	c.JSON(http.StatusCreated, gin.H{
 		"status": "ok",
@@ -55,11 +56,12 @@ func BookUpdate(c *gin.Context) {
 
 func BookDelete(c *gin.Context){
 	id := c.PostForm("id")
-	intId, err := strconv.ParseInt(id, 10, 0) 
+	intId, err := strconv.ParseInt(id, 10, 0)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Bad request")
-	} 
-	bookService := service.BookService{}
+		return
+	}
+	bookService :=service.BookService{}
 	err = bookService.DeleteBook(int(intId))
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Server Error")
