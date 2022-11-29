@@ -1,13 +1,12 @@
 package service
 
 import (
-	"books_memo_app/model"
-	"database/sql/driver"
 	"errors"
 	"fmt"
+	"github.com/go-xorm/xorm"
+	"books_memo_app/model"
 	"log"
 
-	"github.com/go-xorm/xorm"
 )
 
 var DbEngine *xorm.Engine
@@ -17,11 +16,11 @@ func init() {
 	DsName := "root:password@(localhost:3306)/book?charset=utf8"
 	err := errors.New("")
 	DbEngine, err = xorm.NewEngine(driverName, DsName)
-	if err != nill && err.Error() != "" {
-		panic(err.Error())
+	if err != nil && err.Error() != "" {
+		log.Fatal(err.Error())
 	}
 	DbEngine.ShowSQL(true)
 	DbEngine.SetMaxOpenConns(2)
-	DbEngine.Sysc2(new(model.book))
+	DbEngine.Sync2(new(model.Book))
 	fmt.Println("init data base ok")
 }
